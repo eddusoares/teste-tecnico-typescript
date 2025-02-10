@@ -1,0 +1,30 @@
+export const database = {
+    "clients": [
+        {
+            "id": 1, "nome": "Eduardo Soares", "tipoCliente": "PF", "cpf": "883.551.193-39", "cnpj": null, "endereço": "Rua 13", "rendaAnual": 100000.00, "faturamentoAnual": null,
+            "produtosContratados": [
+                { "nome": "RF-01", "valorAplicado": 150.00, "taxaDeRetorno": 9.03, "dataDeVencimento": 10032026 },
+                { "nome": "RF-03", "valorAplicado": 3280.00, "taxaDeRetorno": 7.24, "dataDeVencimento": null }
+            ]
+        },
+        {
+            "id": 2, "nome": "José Transportes", "tipoCliente": "PJ", "cpf": null, "cnpj": "44.672.475/0001-08", "endereço": "Rua 10", "rendaAnual": 100000.00, "faturamentoAnual": null,
+            "produtosContratados": [
+                { "nome": "RF-01", "valorAplicado": 150.00, "taxaDeRetorno": 9.03, "dataDeVencimento": 10032026 },
+                { "nome": "RF-03", "valorAplicado": 3280.00, "taxaDeRetorno": 7.24, "dataDeVencimento": null }
+            ]
+        },
+        {
+            "id": 3, "nome": "Maria Silva", "tipoCliente": "PF", "cpf": "816.317.651-24", "cnpj": null, "endereço": "Rua 11", "rendaAnual": 100000.00, "faturamentoAnual": null,
+            "produtosContratados": [
+                { "nome": "RF-01", "valorAplicado": 60000.50, "taxaDeRetorno": 9.03, "dataDeVencimento": 10032026 },
+                { "nome": "RF-03", "valorAplicado": 22000.70, "taxaDeRetorno": 7.24, "dataDeVencimento": null }
+            ]
+        }
+    ],
+    "products": [
+        { "id": 1, "nome": "RF-01", "valorAplicado": null, "taxaDeRetorno": 9.03, "dataDeVencimento": null, "tipoCliente": "PF" },
+        { "id": 2, "nome": "RF-02", "valorAplicado": null, "taxaDeRetorno": 11.09, "dataDeVencimento": null, "tipoCliente": "PJ" },
+        { "id": 3, "nome": "RF-03", "valorAplicado": null, "taxaDeRetorno": 7.24, "dataDeVencimento": null, "tipoCliente": "TDS" }
+    ]
+}
