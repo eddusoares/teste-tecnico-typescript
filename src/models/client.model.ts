@@ -1,5 +1,5 @@
 import { Joi } from "celebrate";
-import { ProductModel } from "./product.model";
+import { Product } from "./product.model";
 
 export class Client  {
     id: number; 
@@ -10,9 +10,9 @@ export class Client  {
     endereco: string;
     rendaAnual: number; 
     faturamentoAnual: number;
-    produtosContratados: ProductModel[]
+    produtosContratados: Product[]
 
-    constructor(data: Client | any) {
+    constructor(data: Client | any ) {
         this.id = data.id;
         this.nome = data.nome;
         this.tipoCliente = data.tipoCliente;

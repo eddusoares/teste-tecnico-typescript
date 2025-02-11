@@ -4,6 +4,7 @@ import { ClientController } from '../controllers/client.controller';
 import { ClientProductsController } from '../controllers/client-products.controller';
 import { celebrate, Segments } from 'celebrate';
 import { newClientSchema } from '../models/client.model';
+import { updateProductSchema } from '../models/product.model';
 export const clientRoutes = Router();
 
 //Rotas CRUD clientes
@@ -20,13 +21,8 @@ clientRoutes.delete('/clients/:id', asyncHandler(ClientController.delete));
 
 //Rotas Crud Produtos por cliente
 //Contratar produto para um Cliente
-clientRoutes.post('/clients/:id/products', asyncHandler(ClientProductsController.create));
+clientRoutes.post('/clients/:id/products', celebrate({ [Segments.BODY]: updateProductSchema}), asyncHandler(ClientProductsController.create));
 //Listar produtos de um cliente
 clientRoutes.get('/clients/:id/products', asyncHandler(ClientProductsController.getAll));
 //Deletar produto de um cliente
 clientRoutes.delete('/clients/:id/products/:productid', asyncHandler(ClientProductsController.delete));
-
-
-//TODO validações por tipo de produto para contratar
-//TODO rota de autenticação FAKE
-//TODO branch firebase, banco de dados real

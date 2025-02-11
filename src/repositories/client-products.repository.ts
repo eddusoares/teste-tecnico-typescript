@@ -1,6 +1,6 @@
 import { database } from "../infrastructure/database";
 import { Client } from "../models/client.model";
-import { ProductModel } from "../models/product.model";
+import { Product } from "../models/product.model";
 
 export class ClientProductsRepository {
     private clientDatabase;
@@ -15,7 +15,7 @@ export class ClientProductsRepository {
         return this.clientDatabase[this.clientDatabase.length - 1].id;
     }
 
-    async getAll(clientId: number): Promise<ProductModel[] | undefined> {
+    async getAll(clientId: number): Promise<Product[] | undefined> {
         const snapshot = await this.clientDatabase.find(client => client.id = clientId)?.produtosContratados;
         if (!snapshot) {
             throw new Error("Cliente não possui produtos")
@@ -28,7 +28,7 @@ export class ClientProductsRepository {
         return client ?? null
     }
 
-    async create(product: ProductModel, clientId: number): Promise<void> {
+    async create(product: Product, clientId: number): Promise<void> {
         const clientIndex = await this.clientDatabase.findIndex(clients => clients.id === clientId);
         this.clientDatabase[clientIndex].produtosContratados.push(product);
     }

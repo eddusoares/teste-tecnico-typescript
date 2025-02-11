@@ -1,5 +1,5 @@
 import { database } from "../infrastructure/database";
-import { ProductModel } from "../models/product.model";
+import { Product } from "../models/product.model";
 
 export class ProductRepository {
     private productDatabase;
@@ -8,12 +8,12 @@ export class ProductRepository {
         this.productDatabase = database.products;
     }
 
-    async getAll(): Promise<ProductModel[]> {
+    async getAll(): Promise<Product[]> {
         const snapshot = await this.productDatabase;
         return snapshot;
     }
 
-    async getByName(name: string): Promise<ProductModel | null> {
+    async getByName(name: string): Promise<Product | null> {
         const product = await this.productDatabase.find((product) => product.nome === name);
         return product ?? null
     }
