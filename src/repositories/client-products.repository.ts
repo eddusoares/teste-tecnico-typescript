@@ -1,3 +1,4 @@
+import { BadRequestError } from "../errors/bad-request.error";
 import { database } from "../infrastructure/database";
 import { Client } from "../models/client.model";
 import { Product } from "../models/product.model";
@@ -5,11 +6,9 @@ import { ProductService } from "../services/product.service";
 
 export class ClientProductsRepository {
     private clientDatabase;
-    private productDatabase;
 
     constructor() {
         this.clientDatabase = database.clients;
-        this.productDatabase = database.products;
     }
 
     getLastId(): number {
@@ -43,11 +42,17 @@ export class ClientProductsRepository {
 
     async delete(clientId: number, productId: number): Promise<void> {
         const clientIndex = await this.clientDatabase.findIndex(clients => clients.id === clientId);
-        const productIndex = await this.productDatabase.findIndex(product => product.id === productId);
-        this.clientDatabase[clientIndex].produtosContratados.splice(productIndex, 1);
+        const clientProducts = this.clientDatabase[clientIndex].produtosContratados;
+        console.log(clientProducts)
+        if (clientProducts.find((product) => product.id === productId)) {
+            const productsLeft = clientProducts.filter((products) => {
+                return products.id !== productId;
+            });
+            this.clientDatabase[clientIndex].produtosContratados = productsLeft;
+        } else {
+            throw new BadRequestError("O cliente não possui o produto solicitado!");
+        }
     }
-
-
 
 
 }

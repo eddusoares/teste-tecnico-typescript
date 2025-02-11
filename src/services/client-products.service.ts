@@ -1,25 +1,31 @@
+import { BadRequestError } from "../errors/bad-request.error";
 import { NotFoundError } from "../errors/not-found.error";
 import { ValidationError } from "../errors/validation.error";
 import { Client } from "../models/client.model";
 import { Product } from "../models/product.model";
 import { ClientProductsRepository } from "../repositories/client-products.repository";
+import { ProductRepository } from "../repositories/product.repository";
 import { ClientService } from "./client.service";
 import { ProductService } from "./product.service";
 
 export class ClientProductsService {
     private clientProductsRepository: ClientProductsRepository;
+    private productRepository: ProductRepository;
 
     constructor() {
         this.clientProductsRepository = new ClientProductsRepository();
+        this.productRepository = new ProductRepository();
     }
 
     async getAll(clientId: number): Promise<Product[] | undefined> {
-        const client = await this.clientProductsRepository.getById(clientId);
+        const client = new ClientService().getById(clientId);
         if (!client) {
             throw new NotFoundError("Cliente não encontrado!")
         }
         return this.clientProductsRepository.getAll(clientId);
     }
+
+
 
     async create(product: Product, clientId: number): Promise<void> {
         const client = await new ClientService().getById(clientId);
@@ -43,11 +49,11 @@ export class ClientProductsService {
         }
     }
 
-    async update(client: Client, clientId: string): Promise<void> {
-        await this.clientProductsRepository.update(client, Number(clientId));
-    }
-
     async delete(clientId: number, productId: number): Promise<void> {
+        const product = this.productRepository.getById(productId);
+        if(!product){
+            throw new BadRequestError("O Produto solicitado não existe!")
+        }
         await this.clientProductsRepository.delete(clientId, productId);
     }
 

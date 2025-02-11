@@ -18,4 +18,9 @@ export class ProductRepository {
         return product ?? null
     }
 
+    async getById(id: number): Promise<Product | null> {
+        const product = await this.productDatabase.find((product) => product.id === id);
+        return product ?? null
+    }
+
 }
