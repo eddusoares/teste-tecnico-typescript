@@ -8,7 +8,7 @@ export class ClientController {
     }
 
     static async getById(req: Request, res: Response) {
-       const clientId = req.params.id 
+       const clientId = Number(req.params.id) 
         res.send(await new ClientService().getById(clientId));
     }
 

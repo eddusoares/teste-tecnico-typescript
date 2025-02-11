@@ -22,7 +22,7 @@ export class ClientProductsController {
         let productId = Number(req.params.productid)
         await new ClientProductsService().delete(clientId, productId);
         res.send({
-            message: "Usuário excluído com sucesso!"
+            message: "Produto excluído com sucesso!"
         });
     }
 

@@ -1,7 +1,11 @@
+import { NotFoundError } from "../errors/not-found.error";
+import { ValidationError } from "../errors/validation.error";
 import { ClientProductModel } from "../models/client-product.model";
 import { ClientModel } from "../models/client.model";
 import { ProductModel } from "../models/product.model";
 import { ClientProductsRepository } from "../repositories/client-products.repository";
+import { ClientService } from "./client.service";
+import { ProductService } from "./product.service";
 
 export class ClientProductsService {
     private clientProductsRepository: ClientProductsRepository;
@@ -11,20 +15,20 @@ export class ClientProductsService {
     }
 
     async getAll(clientId: number): Promise<ProductModel[] | undefined> {
+        const client = await this.clientProductsRepository.getById(clientId);
+        if(!client){
+            throw new NotFoundError("Cliente não encontrado!")
+        }
         return this.clientProductsRepository.getAll(clientId);
     }
 
-    async getById(id: string): Promise<ClientModel> {
-        const client = await this.clientProductsRepository.getById(id);
-        if(!client){
-            throw new Error("Cliente não encontrado")
-        }
-        return client;
-    }
-
     async create(productName: ClientProductModel, clientId: number): Promise<void> {
-        const _productName = productName.productName;
-        await this.clientProductsRepository.create(_productName, clientId)
+        const product = await new ProductService().getByName(productName);
+        const _clientId = await new ClientService().getById(clientId);
+        if(!product){
+            throw new ValidationError("Produto não encontrado para este cliente!");
+        }
+        await this.clientProductsRepository.create(product, _clientId.id)
     }
 
     async update(client: ClientModel, clientId: string): Promise<void> {

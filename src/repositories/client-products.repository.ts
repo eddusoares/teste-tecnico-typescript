@@ -23,20 +23,13 @@ export class ClientProductsRepository {
         return snapshot;
     }
 
-    async getById(id: string): Promise<ClientModel | null> {
-        const client = await this.clientDatabase.find((client) => client.id === Number(id));
+    async getById(id: number): Promise<ClientModel | null> {
+        const client = await this.clientDatabase.find((client) => client.id === id);
         return client ?? null
     }
 
-    async create(productName: string, clientId: number): Promise<void> {
-        const product = await this.productDatabase.find(product => product.nome === productName);
+    async create(product: ProductModel, clientId: number): Promise<void> {
         const clientIndex = await this.clientDatabase.findIndex(clients => clients.id === clientId);
-        console.log(productName)
-        console.log(product)
-        console.log(clientIndex)
-        if (!product || isNaN(clientIndex)) {
-            throw new Error
-        }
         this.clientDatabase[clientIndex].produtosContratados.push(product);
     }
 

@@ -1,3 +1,3 @@
 export type ClientProductModel = {
-    productName: string;
+    name: string;
 }

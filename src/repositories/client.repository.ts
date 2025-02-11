@@ -17,8 +17,8 @@ export class ClientRepository {
         return snapshot;
     }
 
-    async getById(id: string): Promise<ClientModel | null> {
-        const client = await this.clientDatabase.find((client) => client.id === Number(id));
+    async getById(id: number): Promise<ClientModel | null> {
+        const client = await this.clientDatabase.find((client) => client.id === id);
         return client ?? null
     }
 

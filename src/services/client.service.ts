@@ -1,3 +1,4 @@
+import { NotFoundError } from "../errors/not-found.error";
 import { ClientModel } from "../models/client.model";
 import { ClientRepository } from "../repositories/client.repository";
 
@@ -16,10 +17,10 @@ export class ClientService {
         return this.clientRepository.getAll();
     }
 
-    async getById(id: string): Promise<ClientModel> {
+    async getById(id: number): Promise<ClientModel> {
         const client = await this.clientRepository.getById(id);
         if(!client){
-            throw new Error("Cliente não encontrado")
+            throw new NotFoundError("Cliente não encontrado!")
         }
         return client;
     }
