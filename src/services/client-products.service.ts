@@ -23,8 +23,8 @@ export class ClientProductsService {
     }
 
     async create(productName: ClientProductModel, clientId: number): Promise<void> {
-        const product = await new ProductService().getByName(productName);
         const _clientId = await new ClientService().getById(clientId);
+        const product = await new ProductService().getByName(productName);
         if(!product){
             throw new ValidationError("Produto não encontrado para este cliente!");
         }
