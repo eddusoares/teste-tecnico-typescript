@@ -1,6 +1,7 @@
 import { database } from "../infrastructure/database";
 import { Client } from "../models/client.model";
 import { Product } from "../models/product.model";
+import { ProductService } from "../services/product.service";
 
 export class ClientProductsRepository {
     private clientDatabase;
@@ -30,6 +31,7 @@ export class ClientProductsRepository {
 
     async create(product: Product, clientId: number): Promise<void> {
         const clientIndex = await this.clientDatabase.findIndex(clients => clients.id === clientId);
+        product.id = (await new ProductService().getByName(product.nome)).id;
         this.clientDatabase[clientIndex].produtosContratados.push(product);
     }
 

@@ -1,5 +1,4 @@
 import { NotFoundError } from "../errors/not-found.error";
-import { ClientProductModel } from "../models/client-product.model";
 import { Product } from "../models/product.model";
 import { ProductRepository } from "../repositories/product.repository";
 
@@ -14,10 +13,8 @@ export class ProductService {
         return this.productRepository.getAll();
     }
 
-    async getByName(productName: ClientProductModel): Promise<Product> {
-        const _productName = productName.nome;
-        console.log(_productName)
-        const product = await this.productRepository.getByName(_productName);
+    async getByName(productName: string): Promise<Product> {
+        const product = await this.productRepository.getByName(productName);
         if(!product){
             throw new NotFoundError("Produto não encontrado!")
         }
