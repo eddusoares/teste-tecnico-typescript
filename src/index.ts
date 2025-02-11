@@ -7,6 +7,6 @@ const app = express();
 
 routes(app);
 
-app.listen(3000, () => {
-    console.log("Servidor ativo na porta 3000");
+app.listen(3200, () => {
+    console.log("Servidor ativo na porta 3200");
 });

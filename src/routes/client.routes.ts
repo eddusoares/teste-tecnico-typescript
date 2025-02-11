@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { ClientController } from '../controllers/client.controller';
+import { ClientProductsController } from '../controllers/client-products.controller';
 export const clientRoutes = Router();
 
 //Rotas CRUD clientes
@@ -16,8 +17,8 @@ clientRoutes.delete('/clients/:id', ClientController.delete);
 
 //Rotas Crud Produtos por cliente
 //Contratar produto para um Cliente
-clientRoutes.post('/clients/:id/products');
+clientRoutes.post('/clients/:id/products', ClientProductsController.create);
 //Listar produtos de um cliente
-clientRoutes.get('/clients/:id/products');
+clientRoutes.get('/clients/:id/products', ClientProductsController.getAll);
 //Deletar produto de um cliente
-clientRoutes.delete('/clients/:id/products/:id');
+clientRoutes.delete('/clients/:id/products/:productid', ClientProductsController.delete);

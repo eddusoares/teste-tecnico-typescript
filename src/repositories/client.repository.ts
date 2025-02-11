@@ -4,11 +4,11 @@ import { ClientModel } from "../models/client.model";
 export class ClientRepository {
     private clientDatabase;
 
-    constructor(){
+    constructor() {
         this.clientDatabase = database.clients;
     }
 
-    getLastId(): number{
+    getLastId(): number {
         return this.clientDatabase[this.clientDatabase.length - 1].id;
     }
 
@@ -18,7 +18,7 @@ export class ClientRepository {
     }
 
     async getById(id: string): Promise<ClientModel | null> {
-        const client = await this.clientDatabase.find( (client) => client.id === Number(id));
+        const client = await this.clientDatabase.find((client) => client.id === Number(id));
         return client ?? null
     }
 
@@ -26,16 +26,15 @@ export class ClientRepository {
         await this.clientDatabase.push(client);
     }
 
-   async update(client: ClientModel, clientId: number): Promise<void> {
-        const clientIndex = await this.clientDatabase.findIndex(clients => clients.id === clientId );
+    async update(client: ClientModel, clientId: number): Promise<void> {
+        const clientIndex = await this.clientDatabase.findIndex(clients => clients.id === clientId);
         client.id = this.clientDatabase[clientIndex].id;
         this.clientDatabase[clientIndex] = client;
     }
 
     async delete(clientId: number): Promise<void> {
-         const clientIndex = await this.clientDatabase.findIndex(clients => clients.id === clientId );
+        const clientIndex = await this.clientDatabase.findIndex(clients => clients.id === clientId);
         this.clientDatabase.splice(clientIndex, 1);
     }
-
 
 }

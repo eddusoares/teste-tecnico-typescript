@@ -23,8 +23,8 @@ export const database = {
         }
     ],
     "products": [
-        { "id": 1, "nome": "RF-01", "valorAplicado": "", "taxaDeRetorno": 9.03, "dataDeVencimento": "", "tipoCliente": "PF" },
-        { "id": 2, "nome": "RF-02", "valorAplicado": "", "taxaDeRetorno": 11.09, "dataDeVencimento": "", "tipoCliente": "PJ" },
-        { "id": 3, "nome": "RF-03", "valorAplicado": "", "taxaDeRetorno": 7.24, "dataDeVencimento": "", "tipoCliente": "TDS" }
+        { "id": 1, "nome": "RF-01", "valorAplicado": 0, "taxaDeRetorno": 9.03, "dataDeVencimento": "", "tipoCliente": "PF" },
+        { "id": 2, "nome": "RF-02", "valorAplicado": 0, "taxaDeRetorno": 11.09, "dataDeVencimento": "", "tipoCliente": "PJ" },
+        { "id": 3, "nome": "RF-03", "valorAplicado": 0, "taxaDeRetorno": 7.24, "dataDeVencimento": "", "tipoCliente": "TDS" }
     ]
 }
