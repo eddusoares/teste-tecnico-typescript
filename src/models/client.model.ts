@@ -28,8 +28,8 @@ export class Client  {
 export const newClientSchema = Joi.object().keys({
     nome: Joi.string().trim().required(),
     tipoCliente: Joi.string().trim().required(),
-    cpf: Joi.alternatives().conditional('tipoCliente', { not: 'PJ', then: Joi.string().required(), otherwise: Joi.string().allow(null) }),
-    cnpj: Joi.alternatives().conditional('tipoCliente', { not: 'PF', then: Joi.string().required(), otherwise: Joi.string().allow(null) }),
+    cpf: Joi.alternatives().conditional('tipoCliente', { not: 'PJ', then: Joi.string().required(), otherwise: Joi.any().allow(null) }),
+    cnpj: Joi.alternatives().conditional('tipoCliente', { not: 'PF', then: Joi.string().required(), otherwise: Joi.any().allow(null) }),
     endereco: Joi.string().trim().required(),
     rendaAnual: Joi.alternatives().conditional('tipoCliente', { not: 'PJ', then: Joi.number().required(), otherwise: Joi.number() }),
     faturamentoAnual: Joi.alternatives().conditional('tipoCliente', { not: 'PF', then: Joi.number().required(), otherwise: Joi.number() }),
