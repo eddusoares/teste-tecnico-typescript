@@ -5,11 +5,11 @@ import { ClientRepository } from "../repositories/client.repository";
 export class ClientService {
     private clientRepository: ClientRepository;
 
-    constructor(){
+    constructor() {
         this.clientRepository = new ClientRepository();
     }
 
-    newId(): number{
+    newId(): number {
         return this.clientRepository.getLastId() + 1;
     }
 
@@ -19,7 +19,7 @@ export class ClientService {
 
     async getById(id: number): Promise<ClientModel> {
         const client = await this.clientRepository.getById(id);
-        if(!client){
+        if (!client) {
             throw new NotFoundError("Cliente não encontrado!")
         }
         return client;
@@ -29,8 +29,11 @@ export class ClientService {
         client.id = this.newId();
         await this.clientRepository.create(client)
     }
-    async update(client: ClientModel, clientId: string): Promise<void> {
-        await this.clientRepository.update(client, Number(clientId));
+    async update(client: ClientModel, clientId: number): Promise<void> {
+        const _client = await this.getById(clientId);
+        if (_client) {
+            await this.clientRepository.update(client, clientId);
+        }
     }
     async delete(clientId: number): Promise<void> {
         await this.clientRepository.delete(clientId);

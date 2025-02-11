@@ -20,7 +20,7 @@ export class ClientController {
     }
 
     static async update(req: Request, res: Response) {
-        let clientId = req.params.id
+        let clientId = Number(req.params.id);
         let client = req.body;
         await new ClientService().update(client, clientId);        
         res.send({

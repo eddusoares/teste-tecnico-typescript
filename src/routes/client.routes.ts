@@ -10,9 +10,9 @@ clientRoutes.get('/clients', asyncHandler(ClientController.getAll));
 //Listar cliente pelo ID
 clientRoutes.get('/clients/:id', asyncHandler(ClientController.getById));
 //Cadastrar cliente na lista
-clientRoutes.post('/clients', ClientController.create);
+clientRoutes.post('/clients', asyncHandler(ClientController.create));
 //Atualizar cliente pelo ID
-clientRoutes.put('/clients/:id', ClientController.update);
+clientRoutes.put('/clients/:id', asyncHandler(ClientController.update));
 //Deletar cliente pelo ID
 clientRoutes.delete('/clients/:id', asyncHandler(ClientController.delete));
 
