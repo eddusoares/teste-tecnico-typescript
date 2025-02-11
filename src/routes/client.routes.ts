@@ -2,6 +2,8 @@ import { Router } from 'express';
 import asyncHandler from 'express-async-handler'
 import { ClientController } from '../controllers/client.controller';
 import { ClientProductsController } from '../controllers/client-products.controller';
+import { celebrate, Segments } from 'celebrate';
+import { newClientSchema } from '../models/client.model';
 export const clientRoutes = Router();
 
 //Rotas CRUD clientes
@@ -10,9 +12,9 @@ clientRoutes.get('/clients', asyncHandler(ClientController.getAll));
 //Listar cliente pelo ID
 clientRoutes.get('/clients/:id', asyncHandler(ClientController.getById));
 //Cadastrar cliente na lista
-clientRoutes.post('/clients', asyncHandler(ClientController.create));
+clientRoutes.post('/clients', celebrate({ [Segments.BODY]: newClientSchema}), asyncHandler(ClientController.create));
 //Atualizar cliente pelo ID
-clientRoutes.put('/clients/:id', asyncHandler(ClientController.update));
+clientRoutes.put('/clients/:id', celebrate({ [Segments.BODY]: newClientSchema}), asyncHandler(ClientController.update));
 //Deletar cliente pelo ID
 clientRoutes.delete('/clients/:id', asyncHandler(ClientController.delete));
 
@@ -23,3 +25,8 @@ clientRoutes.post('/clients/:id/products', asyncHandler(ClientProductsController
 clientRoutes.get('/clients/:id/products', asyncHandler(ClientProductsController.getAll));
 //Deletar produto de um cliente
 clientRoutes.delete('/clients/:id/products/:productid', asyncHandler(ClientProductsController.delete));
+
+
+//TODO validações por tipo de produto para contratar
+//TODO rota de autenticação FAKE
+//TODO branch firebase, banco de dados real

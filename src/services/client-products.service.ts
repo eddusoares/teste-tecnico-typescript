@@ -1,7 +1,7 @@
 import { NotFoundError } from "../errors/not-found.error";
 import { ValidationError } from "../errors/validation.error";
 import { ClientProductModel } from "../models/client-product.model";
-import { ClientModel } from "../models/client.model";
+import { Client } from "../models/client.model";
 import { ProductModel } from "../models/product.model";
 import { ClientProductsRepository } from "../repositories/client-products.repository";
 import { ClientService } from "./client.service";
@@ -31,12 +31,21 @@ export class ClientProductsService {
         await this.clientProductsRepository.create(product, _clientId.id)
     }
 
-    async update(client: ClientModel, clientId: string): Promise<void> {
+    async update(client: Client, clientId: string): Promise<void> {
         await this.clientProductsRepository.update(client, Number(clientId));
     }
 
     async delete(clientId: number, productId: number): Promise<void> {
         await this.clientProductsRepository.delete(clientId, productId);
     }
+
+    getValorTotalAplicadoPorCliente(client: Client): number {
+        const valorTotal = client.produtosContratados.reduce(
+            (acc, {valorAplicado} ) => acc + valorAplicado, 0 
+        )
+        return valorTotal;
+    }
+
+    //TODO regras de produtos
 
 }

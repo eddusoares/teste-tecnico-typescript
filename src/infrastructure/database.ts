@@ -1,21 +1,21 @@
 export const database = {
     "clients": [
         {
-            "id": 1, "nome": "Eduardo Soares", "tipoCliente": "PF", "cpf": "883.551.193-39", "cnpj": "", "endereço": "Rua 13", "rendaAnual": 100000.00, "faturamentoAnual": 0,
+            "id": 1, "nome": "Eduardo Soares", "tipoCliente": "PF", "cpf": "883.551.193-39", "cnpj": "", "endereco": "Rua 13", "rendaAnual": 100000.00, "faturamentoAnual": 0,
             "produtosContratados": [
                 {"id": 1,"nome": "RF-01", "valorAplicado": 150.00, "taxaDeRetorno": 9.03, "dataDeVencimento": "10032026", "tipoCliente": "PF" },
                 {"id": 3,"nome": "RF-03", "valorAplicado": 3280.00, "taxaDeRetorno": 7.24, "dataDeVencimento": "", "tipoCliente": "TDS" }
             ]
         },
         {
-            "id": 2, "nome": "José Transportes", "tipoCliente": "PJ", "cpf": "", "cnpj": "44.672.475/0001-08", "endereço": "Rua 10", "rendaAnual": 0, "faturamentoAnual": 100000.00,
+            "id": 2, "nome": "José Transportes", "tipoCliente": "PJ", "cpf": "", "cnpj": "44.672.475/0001-08", "endereco": "Rua 10", "rendaAnual": 0, "faturamentoAnual": 100000.00,
             "produtosContratados": [
                 {"id": 1, "nome": "RF-01", "valorAplicado": 150.00, "taxaDeRetorno": 9.03, "dataDeVencimento": "10032026", "tipoCliente": "PF" },
                 {"id": 3, "nome": "RF-03", "valorAplicado": 3280.00, "taxaDeRetorno": 7.24, "dataDeVencimento": "", "tipoCliente": "TDS" }
             ]
         },
         {
-            "id": 3, "nome": "Maria Silva", "tipoCliente": "PF", "cpf": "816.317.651-24", "cnpj": "", "endereço": "Rua 11", "rendaAnual": 100000.00, "faturamentoAnual": 0,
+            "id": 3, "nome": "Maria Silva", "tipoCliente": "PF", "cpf": "816.317.651-24", "cnpj": "", "endereco": "Rua 11", "rendaAnual": 100000.00, "faturamentoAnual": 0,
             "produtosContratados": [
                 {"id": 1, "nome": "RF-01", "valorAplicado": 60000.50, "taxaDeRetorno": 9.03, "dataDeVencimento": "10032026", "tipoCliente": "PF" },
                 {"id": 3, "nome": "RF-03", "valorAplicado": 22000.70, "taxaDeRetorno": 7.24, "dataDeVencimento": "", "tipoCliente": "TDS" }

@@ -1,5 +1,6 @@
 import { NotFoundError } from "../errors/not-found.error";
-import { ClientModel } from "../models/client.model";
+import { ValidationError } from "../errors/validation.error";
+import { Client } from "../models/client.model";
 import { ClientRepository } from "../repositories/client.repository";
 
 export class ClientService {
@@ -13,11 +14,11 @@ export class ClientService {
         return this.clientRepository.getLastId() + 1;
     }
 
-    async getAll(): Promise<ClientModel[]> {
+    async getAll(): Promise<Client[]> {
         return this.clientRepository.getAll();
     }
 
-    async getById(id: number): Promise<ClientModel> {
+    async getById(id: number): Promise<Client> {
         const client = await this.clientRepository.getById(id);
         if (!client) {
             throw new NotFoundError("Cliente não encontrado!")
@@ -25,11 +26,17 @@ export class ClientService {
         return client;
     }
 
-    async create(client: ClientModel): Promise<void> {
+    async create(client: Client): Promise<void> {
         client.id = this.newId();
         await this.clientRepository.create(client)
     }
-    async update(client: ClientModel, clientId: number): Promise<void> {
+    async update(client: Client, clientId: number): Promise<void> {
+        if(this.getTipoCliente(client) === "PF" && client.cnpj !== null ){
+            throw new ValidationError("Cliente do tipo Pessoa Física não pode ter um CNPJ!")
+        }
+        if(this.getTipoCliente(client) === "PJ" && client.cpf !== null ){
+            throw new ValidationError("Cliente do tipo Pessoa Jurídica não pode ter um CPF!")
+        }
         const _client = await this.getById(clientId);
         if (_client) {
             await this.clientRepository.update(client, clientId);
@@ -37,6 +44,10 @@ export class ClientService {
     }
     async delete(clientId: number): Promise<void> {
         await this.clientRepository.delete(clientId);
+    }   
+
+    getTipoCliente(client: Client): string {
+        return client.tipoCliente;
     }
 
 }

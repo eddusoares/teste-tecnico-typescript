@@ -1,5 +1,5 @@
 import { database } from "../infrastructure/database";
-import { ClientModel } from "../models/client.model";
+import { Client } from "../models/client.model";
 import { ProductModel } from "../models/product.model";
 
 export class ClientProductsRepository {
@@ -23,7 +23,7 @@ export class ClientProductsRepository {
         return snapshot;
     }
 
-    async getById(id: number): Promise<ClientModel | null> {
+    async getById(id: number): Promise<Client | null> {
         const client = await this.clientDatabase.find((client) => client.id === id);
         return client ?? null
     }
@@ -33,7 +33,7 @@ export class ClientProductsRepository {
         this.clientDatabase[clientIndex].produtosContratados.push(product);
     }
 
-    async update(client: ClientModel, clientId: number): Promise<void> {
+    async update(client: Client, clientId: number): Promise<void> {
         const clientIndex = await this.clientDatabase.findIndex(clients => clients.id === clientId);
         client.id = this.clientDatabase[clientIndex].id;
         this.clientDatabase[clientIndex] = client;
