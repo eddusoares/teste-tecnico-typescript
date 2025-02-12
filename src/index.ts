@@ -1,16 +1,7 @@
-import express from "express";
-import { routes } from "./routes";
-import { routeNotFoundHandler } from "./middleware/route-not-found.middleware";
-import { errorHandler } from "./middleware/error-handler.middleware";
+import { setupApp } from './setup-app';
 
-
-
-const app = express();
-
-routes(app);
-routeNotFoundHandler(app);
-errorHandler(app);
+const app = setupApp();
 
 app.listen(3200, () => {
-    console.log("Servidor ativo na porta 3200");
+  console.log('Servidor ativo na porta 3200');
 });
