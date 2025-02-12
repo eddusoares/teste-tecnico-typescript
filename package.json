@@ -1,0 +1,37 @@
+{
+  "name": "ecommerce-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "npx tsc-watch --onSuccess \"node ./lib/index.js\"",
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@joi/date": "^2.1.1",
+    "celebrate": "^15.0.3",
+    "express": "^4.21.2",
+    "express-async-handler": "^1.2.0",
+    "firebase": "^11.3.0",
+    "firebase-admin": "^13.1.0",
+    "ts-jest": "^29.2.5"
+  },
+  "devDependencies": {
+    "@jest/globals": "^29.7.0",
+    "@tsconfig/recommended": "^1.0.8",
+    "@types/express": "^5.0.0",
+    "@types/jest": "^28.1.6",
+    "@types/node": "^22.13.1",
+    "@types/supertest": "^6.0.2",
+    "jest": "^29.7.0",
+    "jest-mock-extended": "^4.0.0-beta1",
+    "supertest": "^7.0.0",
+    "ts-node": "^10.9.2",
+    "tsc-watch": "^6.2.1",
+    "typescript": "^5.7.3"
+  }
+}
